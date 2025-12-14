@@ -3,7 +3,7 @@ import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../store/store";
-import { setCredentials } from "../../redux/slice/userSlice";
+import { setCredentials, type UserState } from "../../redux/slice/userSlice";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
@@ -15,15 +15,16 @@ const SignIn = () => {
     try {
       const result = await signInWithPopup(auth, provider);
 
+
       const userData = {
         uid: result.user.uid,
         name: result.user.displayName,
         email: result.user.email,
         photoURL: result.user.photoURL,
-        role: "student"
+        role: "student",
       };
        
-      dispatch(setCredentials(userData));
+      dispatch(setCredentials(userData as UserState));
       console.log("dispatch", userData)
     } catch (error: any) {
       console.error("Error code:", error.code);

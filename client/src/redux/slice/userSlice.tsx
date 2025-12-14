@@ -1,11 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface UserState {
+type UserRole = "student" | "instructor" | "admin";
+
+
+export interface UserState {
   uid?: string;
   name?: string | null;
   email?: string | null;
   photoURL?: string | null;
-  role?: "student" | "instructor" | "admin";
+  role?: UserRole;
 };
 
 const initialState: UserState = {};
