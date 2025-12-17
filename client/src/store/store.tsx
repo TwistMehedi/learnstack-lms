@@ -14,22 +14,18 @@ import {
   REGISTER,
 } from "redux-persist";
 
-
 const persistConfig = {
   key: "root",
   storage,
   whitelist: ["user"],
 };
 
-
 const rootReducer = combineReducers({
   user: userSlice,
   [authApi.reducerPath]: authApi.reducer
 });
 
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
  
 export const store = configureStore({
   reducer: persistedReducer,
@@ -47,8 +43,6 @@ export const store = configureStore({
         ],
       },
     }).concat(authApi.middleware),
-
-  
 });
 
 export const persistor = persistStore(store);
